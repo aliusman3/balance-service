@@ -47,6 +47,8 @@ async function charge(account: string, charges: number): Promise<ChargeResult> {
         if (e instanceof WatchError) {
             await new Promise(resolve => setTimeout(resolve, 10));
             res = await charge(account, charges);
+        } else {
+            throw e;
         }
     } finally {
         await client.disconnect();
