@@ -34,8 +34,9 @@ async function basicParallelTest() {
 async function basicNoBalanceTest() {
     await app.post("/reset").send({ "account": "test" }).expect(204);
     const responses = await Promise.all([
-        app.post("/charge").send({ "account": "test", "charges": 100 }).expect(200),
-        app.post("/charge").send({ "account": "test", "charges": 15 }).expect(200)
+        app.post("/charge").send({ "account": "test", "charges": 85 }).expect(200),
+        app.post("/charge").send({ "account": "test", "charges": 15 }).expect(200),
+        app.post("/charge").send({ "account": "test", "charges": 10 }).expect(200),
     ]);
     const authorized = responses.some(res => !res.body.isAuthorized);
     if (!authorized) {
